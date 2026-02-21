@@ -7,7 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PizzariadomarioApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PizzariadomarioApplication.class, args);
+
+        SpringApplication.run(PizzariadomarioApplication.class, args);
+
+        System.out.println("Servidor respondendo da porta 8080");
+
 	}
 
 }

@@ -2,19 +2,20 @@ package com.itb.tcc.mif3an.pizzariadomario.model.entity;
 
 import com.itb.tcc.mif3an.pizzariadomario.model.enums.TipoUsuario;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "Usuario")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)  // Informa que o padrão utilizado é uma única tabela para todos os usuários
 @DiscriminatorColumn(name = "tipo_usuario", discriminatorType = DiscriminatorType.STRING) // Informa qual é o nome da coluna que vai ser utilizada
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@NoArgsConstructor   // Construtor padrão
+@AllArgsConstructor  // Construtor com todos os atributos
+@Builder             // Forma diferenciadada para criar objetos
 public class Usuario {
 
     @Id                         // PK

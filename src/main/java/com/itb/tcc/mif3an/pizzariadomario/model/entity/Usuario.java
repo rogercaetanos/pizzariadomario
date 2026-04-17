@@ -3,8 +3,12 @@ package com.itb.tcc.mif3an.pizzariadomario.model.entity;
 import com.itb.tcc.mif3an.pizzariadomario.model.enums.TipoUsuario;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "Usuario")
@@ -16,7 +20,7 @@ import java.time.LocalDate;
 @NoArgsConstructor   // Construtor padrão
 @AllArgsConstructor  // Construtor com todos os atributos
 @Builder             // Forma diferenciadada para criar objetos
-public class Usuario {
+public class Usuario implements UserDetails {
 
     @Id                         // PK
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-Incremento (identificado sequencialmente de 1 em 1)
@@ -49,4 +53,33 @@ public class Usuario {
 
     private boolean codStatus;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return tipoUsuario.getAuthorities();
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
